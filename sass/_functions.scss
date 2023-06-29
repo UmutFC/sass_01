@@ -1,0 +1,16 @@
+// Set Text Color
+@function set-text-color($color) {
+    @if(lightness($color) > 50) {
+        @return #000;
+    }@else {
+        @return #fff;
+    }
+}
+//difference between function and mixin, function returns something but mixin set of style we want to include.
+
+// Transform Mixin
+@mixin transform($property) {
+    --webkit-transform: $property;
+    -ms-transform: $property;
+    transform: $property;
+}

@@ -1,0 +1,94 @@
+@import '_variables';
+@import 'functions';
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: $light-color;
+    color: $dark-color; 
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.5;
+}
+
+header {
+    background: $dark-color;
+    color: set-text-color($dark-color);
+    padding: 1rem;
+
+    h1 {
+        text-align: center;
+    }
+    //instead of creating new line for child elements you can set them up inside of parent element and structure them with hierarchy
+}
+
+// header h1 {
+//     text-align: center;
+// }
+
+.section {
+    padding: 3rem;
+
+    h3 {
+        font-size: 2rem;
+    }
+
+    //& means parents name so it will be 'section' + '-a' which is basically 'section-a'
+    &-a {
+        background: $primary-color;
+        color: $light-color;
+    }
+
+    &-b {
+        background: $secondary-color;
+        color: $light-color;
+    }
+}
+
+a {
+    color: $dark-color;
+
+    //you can use & also with pseudo classes
+    &:hover {
+        color: coral;
+    }
+}
+
+//also you can unite the common properties to inside of element which starting name with '%' then you can call this element with '@extend%element_name;' from other elements
+%btn-shared {
+    display: inline-block;
+    padding: .7rem 2rem;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    margin-top: 1rem;
+}
+
+.btn {
+    &-light {
+        @extend %btn-shared;
+        background-color: $light-color;
+        color: $dark-color;
+
+        &:hover {
+            //for importing mixin you should '@include' and name the mixin
+            @include transform(rotate(20deg));
+            //darken is predefined function
+            background-color: darken($light-color, 10%);
+        }
+    }
+
+    &-dark {
+        @extend %btn-shared;
+        background-color: $dark-color;
+        color: $light-color;
+        
+        &:hover {
+            //for importing mixin you should '@include' and name the mixin
+            @include transform(rotate(-20deg));
+            background-color: lighten($dark-color, 10%);
+        }
+    }
+}
